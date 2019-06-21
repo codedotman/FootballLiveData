@@ -44,9 +44,16 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.TableViewHol
         tableViewHolder.TeamPoints.setText(result.getPoints()+"");
         tableViewHolder.TeamGDiff.setText(result.getGoalDifference()+"");
         tableViewHolder.MatchesPlayed.setText(result.getPlayedGames()+"");
-        mPicasso.with(mContext)
-                .load(result.getTeam().getCrestUrl()).error(R.drawable.default_crest)
-                .into(tableViewHolder.TeamCrest);
+        if (result.getTeam().getCrestUrl() !=null && !result.getTeam().getCrestUrl().isEmpty()) {
+            mPicasso.with(mContext)
+                    .load(result.getTeam().getCrestUrl()).error(R.drawable.default_crest)
+                    .into(tableViewHolder.TeamCrest);
+        } else{
+            tableViewHolder.TeamCrest.setImageResource(R.drawable.default_crest);
+
+
+        }
+
 
     }
 
