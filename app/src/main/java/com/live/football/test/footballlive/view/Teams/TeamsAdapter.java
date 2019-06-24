@@ -40,9 +40,14 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.TeamsViewHol
     public void onBindViewHolder(@NonNull TeamsViewHolder teamsViewHolder, int i) {
         Teams result = resultList.get(i);
         teamsViewHolder.TeamName.setText(result.getName());
-        mPicasso.with(mContext)
-                .load(result.getCrestUrl()).error(R.drawable.default_crest)
-                .into(teamsViewHolder.TeamCrest);
+        if (result.getCrestUrl() !=null && !result.getCrestUrl().isEmpty()) {
+            mPicasso.with(mContext)
+                    .load(result.getCrestUrl()).error(R.drawable.default_crest)
+                    .into(teamsViewHolder.TeamCrest);
+        } else{
+            teamsViewHolder.TeamCrest.setImageResource(R.drawable.default_crest);
+        }
+
 
     }
     @Override
